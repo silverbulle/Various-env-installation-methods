@@ -1,0 +1,8 @@
+touch filename  创建文件 ex:touch pytorch.txt
+
+mkdir dirname    创建文件夹
+
+rm -rf filename
+rm -rf dirname     删除文件或目录
+
+创建及删除文件或目录须在sudo权限下

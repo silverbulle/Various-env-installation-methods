@@ -12,4 +12,4 @@ conda config --remove-key channels
 会在当前用户目录下创建 .condarc  文件，可以查看更换源前后该文件内容的变化。
 
 
-pytorch安装    https://pytorch.org/get-started/locally/
+
