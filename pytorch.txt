@@ -1,1 +1,8 @@
 pytorch安装    https://pytorch.org/get-started/locally/
+
+
+pytorch 0.3.1安装——python2.7,cuda8.0使用如下：
+pip install http://download.pytorch.org/whl/cu80/torch-0.3.1-cp27-cp27mu-linux_x86_64.whl
+同时安装torchvision时要指定版本，以免同时安装最新版本的pytorch把上一步的覆盖掉
+pytorch0.3.1对应torchvision版本0.2.1
+pip install torchvision==0.2.1

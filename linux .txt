@@ -6,3 +6,12 @@ rm -rf filename
 rm -rf dirname     删除文件或目录
 
 创建及删除文件或目录须在sudo权限下
+
+查看文件列表：ls  添加-a会显示隐藏文件  添加-l显示文件详细信息
+
+
+conda相关操作：
+激活环境：source activate xx
+退出环境：source deactivate xx
+删除环境：conda remove -n xx -all
+删除虚拟环境中的包：conda remove env_name package_name
