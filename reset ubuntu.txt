@@ -1,0 +1,17 @@
+1.使用EasyUEFI删除ubuntu启动引导
+2.删除win10EFI启动分区里的ubuntu启动引导：
+	1. 输入【Win】+【R】，输入【diskpart】打开diskpart；
+
+	2. 输入【list disk】，显示磁盘列表
+
+	3. 输入【select disk 0】，选择磁盘0，即win10系统所在磁盘；
+
+	4. 输入【list partition】，查看磁盘0的分区列表；
+
+	5. 输入【select partition 3】，选择wind10启动引导项所在分区（即Type=System，容量一般较小为100M的那一个分区）；
+
+	6. 为win10的EFI启动引导项所在分区分配盘符，输入【assign letter = p】，这里p为盘符名称，字母A~Z应该都可以，注意不要和已有盘符名重复即可；
+3.磁盘内此时会多出p盘，此时先用管理员权限打开记事本，然后通过记事本菜单栏里的【打开】来访问P盘，会发现P盘里有个EFI文件夹，打开EFI文件夹，然后直接删除Ubuntu文件夹，然后退出
+4.再回到diskpart删除刚刚分配的盘符P，输入【remove letter = p】即可
+
+至此ubuntu的启动引导已经全部删干净了
