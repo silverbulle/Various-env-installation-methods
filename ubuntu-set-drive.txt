@@ -1,0 +1,41 @@
+Ubuntu18.04驱动安装参考网址：https://linuxconfig.org/how-to-install-the-nvidia-drivers-on-ubuntu-18-04-bionic-beaver-linux#h7-automatic-install-using-ppa-repository-to-install-nvidia-beta-drivers
+
+
+
+禁用显卡的方法这里在记一下:
+在/etc/modprobe.d/blacklist.conf里添加，如下内容，并执行 sudo update-initramfs -u
+
+blacklist nouveau
+options nouveau modeset=0
+重启后用lsmod | grep nouveau,如果没有任何输出说明禁用成功。
+
+
+
+
+
+安装方法：
+Ⅰ
+1.首先检测nvidia图形卡的型号和推荐的驱动程序
+ubuntu-drivers devices
+2.若同意安装推荐的驱动版本则使用命令安装所有建议的驱动程序
+sudo ubuntu-drivers autoinstall   
+或者使用apt命令安装其它版本的驱动
+sudo apt install xxx(nvidia-driver-340)
+3.安装成功后使用 nvidia-smi 验证安装是否成功，如果显示显卡相关信息则验证表示安装成功
+
+Ⅱ
+使用graphics-drivers 存储库可以安装最新的驱动版本，但有可能导致系统不稳定
+1.首先，将ppa:graphics-drivers/ppa存储库添加到系统中
+sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt update
+2.同方法Ⅰ的1-3操作相同
+
+Ⅲ（暂不记录，具体使用到再查看参考网址）
+使用Nvidia.com官方驱动程序进行手动安装
+1.识别NVIDIA VGA卡
+lshw -numeric -C display   
+或者
+lspci -vnn | grep VGA
+2.下载官方的Nvidia驱动（http://www.nvidia.com/Download/index.aspx）（翻墙）
+3.
+
