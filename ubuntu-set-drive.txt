@@ -21,14 +21,14 @@ ubuntu-drivers devices
 sudo ubuntu-drivers autoinstall   
 或者使用apt命令安装其它版本的驱动
 sudo apt install xxx(nvidia-driver-340)
-3.安装成功后使用 nvidia-smi 验证安装是否成功，如果显示显卡相关信息则验证表示安装成功
+3.安装成功后使用 nvidia-smi 验证安装是否成功，如果显示显卡相关信息则验证表示安装成功(安装后可能需要重启)
 
 Ⅱ
 使用graphics-drivers 存储库可以安装最新的驱动版本，但有可能导致系统不稳定
 1.首先，将ppa:graphics-drivers/ppa存储库添加到系统中
 sudo add-apt-repository ppa:graphics-drivers/ppa
 sudo apt update
-2.同方法Ⅰ的1-3操作相同
+2.同方法Ⅰ的1-3操作相同(安装后可能需要重启)
 
 Ⅲ（暂不记录，具体使用到再查看参考网址）
 使用Nvidia.com官方驱动程序进行手动安装
