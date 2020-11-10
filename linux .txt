@@ -13,9 +13,18 @@ rm -rf dirname     删除文件或目录
 列出所有软件：sudo dpkg --list
 使用命令进行删除：sudo apt-get --purge remove  名称
 
+Ubuntu18.04下使用halt关机卡在关机界面的解决办法：
+1.#使用vim打开并修改modules文件
+sudo vim /etc/modules
+#在文件的末尾添加一行，保存退出
+apm power_off=1
+2.#使用vim打开并修改grub文件
+sudo vim /etc/default/grub
+#修改"GRUB_CMDLINE_LINUX="这一行等号后面的内容如下，然后保存退出
+GRUB_CMDLINE_LINUX="noacpi acpi=off acpi=force apm power_off=1"
+3.#最后，更新一下grub
+qing@qingsword.com:~$ sudo update-grub
 
-conda相关操作：
-激活环境：source activate xx
-退出环境：source deactivate xx
-删除环境：conda remove -n xx -all
-删除虚拟环境中的包：conda remove env_name package_name
+
+
+

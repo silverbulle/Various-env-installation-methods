@@ -11,5 +11,20 @@ conda config --remove-key channels
 
 会在当前用户目录下创建 .condarc  文件，可以查看更换源前后该文件内容的变化。
 
+conda相关操作：
+激活环境：source activate xx
+退出环境：source deactivate xx
+删除环境：conda remove -n xx -all
+删除虚拟环境中的包：conda remove env_name package_name
 
 
+conda在linux下换源：
+将以下配置文件写在~/.condarc中
+vim ~/.condarc
+
+channels:
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
+ssl_verify: true

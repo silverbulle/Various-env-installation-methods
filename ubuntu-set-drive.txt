@@ -1,16 +1,12 @@
 Ubuntu18.04驱动安装参考网址：https://linuxconfig.org/how-to-install-the-nvidia-drivers-on-ubuntu-18-04-bionic-beaver-linux#h7-automatic-install-using-ppa-repository-to-install-nvidia-beta-drivers
 
 
-
 禁用显卡的方法这里在记一下:
 在/etc/modprobe.d/blacklist.conf里添加，如下内容，并执行 sudo update-initramfs -u
 
 blacklist nouveau
 options nouveau modeset=0
 重启后用lsmod | grep nouveau,如果没有任何输出说明禁用成功。
-
-
-
 
 
 安装方法：
