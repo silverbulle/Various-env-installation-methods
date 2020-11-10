@@ -1,0 +1,21 @@
+Ubuntu18.04安装deepin
+wget -O- https://deepin-wine.i-m.dev/setup.sh | sh
+sudo apt-get install deepin.com.qq.office
+sudo apt-get install  deepin.com.baidu.pan
+# 微信还是deepin的稳定一些，自己wine的可能会有很多莫名其妙的bug
+sudo apt-get install  deepin.com.wechat
+
+
+安装后乱码问题解决：（当Ubuntu1804为非中文状态时）
+1.gedit /opt/deepinwine/tools/run.sh
+
+2.找到WINE_CMD
+修改为：WINE_CMD="LC_ALL=zh_CN.UTF-8 deepin-wine"
+
+
+删除软件:
+列出所有软件：sudo dpkg --list
+使用命令进行删除：sudo apt-get --purge remove  名称
+
+
+

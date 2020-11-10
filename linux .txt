@@ -9,6 +9,10 @@ rm -rf dirname     删除文件或目录
 
 查看文件列表：ls  添加-a会显示隐藏文件  添加-l显示文件详细信息
 
+以磁盘为单位查看文件系统: df -hl
+列出所有软件：sudo dpkg --list
+使用命令进行删除：sudo apt-get --purge remove  名称
+
 
 conda相关操作：
 激活环境：source activate xx
