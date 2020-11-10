@@ -15,16 +15,23 @@ conda相关操作：
 激活环境：source activate xx
 退出环境：source deactivate xx
 删除环境：conda remove -n xx -all
-删除虚拟环境中的包：conda remove env_name package_name
+删除虚拟环境中的包：conda remove <env_name> <package_name>
+复制环境： conda create --name <new_env_name> --clone <copied_env_name>
+模糊查找含有<text>字段的包名： conda search <text>
+导出当前环境的包：conda env export > environment.yaml
+使用导出的yaml文件重新创建环境：conda env create -f environment.yaml
+
 
 
 conda在linux下换源：
 将以下配置文件写在~/.condarc中
 vim ~/.condarc
-
+###
 channels:
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
 ssl_verify: true
+###
+

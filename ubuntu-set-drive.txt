@@ -33,5 +33,28 @@ lshw -numeric -C display
 或者
 lspci -vnn | grep VGA
 2.下载官方的Nvidia驱动（http://www.nvidia.com/Download/index.aspx）（翻墙）
-3.
+3.……
 
+
+关于CUDA和Cudnn：
+1.CUDA本质上只是一个工具包而已，NVIDIA的显卡驱动器与CUDA并不是一一对应的，一个最新的显卡驱动下可以安装不同版本的CUDA工具包；
+2.cuDNN是一个SDK，是一个专门用于神经网络的加速包，注意，它跟CUDA没有一一对应的关系，即每一个版本的CUDA可能有好几个版本的cuDNN与之对应，但一般有一个最新版本的cuDNN版本与CUDA对应更好；
+
+3.. CUDA Toolkit and Compatible Driver Versions（CUDA和驱动版本对应关系）
+CUDA Toolkit	                	Linux x86_64 Driver Version	Windows x86_64 Driver Version
+CUDA 11.1.1 Update 1		>=455.32			>=456.81
+CUDA 11.1 GA	                	>=455.23			>=456.38
+CUDA 11.0.3 Update 1		>= 450.51.06		>= 451.82
+CUDA 11.0.2 GA			>= 450.51.05		>= 451.48
+CUDA 11.0.1 RC			>= 450.36.06		>= 451.22
+CUDA 10.2.89			>= 440.33			>= 441.22
+CUDA 10.1 (10.1.105 general release, and updates)	>= 418.39		>= 418.96
+CUDA 10.0.130			>= 410.48			>= 411.31
+CUDA 9.2 (9.2.148 Update 1)		>= 396.37			>= 398.26
+CUDA 9.2 (9.2.88)			>= 396.26			>= 397.44
+CUDA 9.1 (9.1.85)			>= 390.46			>= 391.29
+CUDA 9.0 (9.0.76)			>= 384.81			>= 385.54
+CUDA 8.0 (8.0.61 GA2)		>= 375.26			>= 376.51
+CUDA 8.0 (8.0.44)			>= 367.48			>= 369.30
+CUDA 7.5 (7.5.16)			>= 352.31			>= 353.66
+CUDA 7.0 (7.0.28)			>= 346.46			>= 347.62

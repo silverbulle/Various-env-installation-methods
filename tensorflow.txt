@@ -1,0 +1,11 @@
+查看当前 Anaconda 支持的 TensorFlow CPU 和 GPU 版本
+conda search tensorflow --info 和 conda search tensorflow-gpu --info 
+
+用anaconda安装一整套tensorflow（包括cuda和cudnn）：
+sudo bash Anaconda*.sh
+sudo gedit ~/.bashrc
+export PATH="/opt/anaconda3/bin:$PATH"
+source ~/.bashrc
+conda list
+conda search tensorflow-gpu
+conda install tensorflow-gpu==1.13.1
