@@ -1,0 +1,2 @@
+提取视频片段：
+for fi in $(ls); do ffmpeg -i $fi -r 20 /home/silverbullet/Videos/MSR_Video_Description_Corpus/YouTubeClips-20fps/$fi%d.jpg; done
