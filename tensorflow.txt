@@ -12,3 +12,11 @@ conda install tensorflow-gpu==1.13.1
 
 暂时使用的sonnet安装方法：
 pip install "dm-sonnet<2.0.0"
+
+目前可以跑起来的一个版本：
+python = 3.6
+dm-sonnet = 1.36
+tensorflow-gpu = 1.14.0  
+cudatoolkit = 10.1.243
+cudnn = 7.6.5
+tensorflow-probability = 0.7.0
