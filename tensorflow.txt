@@ -9,3 +9,6 @@ source ~/.bashrc
 conda list
 conda search tensorflow-gpu
 conda install tensorflow-gpu==1.13.1
+
+暂时使用的sonnet安装方法：
+pip install "dm-sonnet<2.0.0"

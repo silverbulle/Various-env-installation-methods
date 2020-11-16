@@ -14,7 +14,7 @@ conda config --remove-key channels
 conda相关操作：
 激活环境：source activate xx
 退出环境：source deactivate xx
-删除环境：conda remove -n xx -all
+删除环境：conda remove -n xx --all
 删除虚拟环境中的包：conda remove <env_name> <package_name>
 复制环境： conda create --name <new_env_name> --clone <copied_env_name>
 模糊查找含有<text>字段的包名： conda search <text>
@@ -34,4 +34,8 @@ channels:
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
 ssl_verify: true
 ###
+
+安装PIL：
+在3.x的python版本下，PIL已更新为pillow（PIL只支持到python2.7）
+安装时直接使用conda install pillow
 
