@@ -1,0 +1,15 @@
+删除当前文件的git本地仓库：
+rm -rf .git
+
+
+将新建文件添加到远程仓库：
+git remote add xx git@github.com:han1202012/TabHost_Test.git
+
+远程提交：
+git push -u xx master
+
+添加忽略文件：
+1.touch .gitignore
+2.用vim打开，将需要忽视的文件填入
+
+
