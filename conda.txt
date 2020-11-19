@@ -33,7 +33,13 @@ channels:
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
 ssl_verify: true
+show_channel_urls: true
 ###
+
+其它源：
+中科大：
+  - https://mirrors.ustc.edu.cn/anaconda/pkgs/main/
+  - https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/
 
 安装PIL：
 在3.x的python版本下，PIL已更新为pillow（PIL只支持到python2.7）
