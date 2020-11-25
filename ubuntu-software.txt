@@ -7,7 +7,7 @@ sudo apt-get install  deepin.com.wechat
 
 
 安装后乱码问题解决：（当Ubuntu1804为非中文状态时）
-1.gedit /opt/deepinwine/tools/run.sh
+1.sudo gedit /opt/deepinwine/tools/run.sh
 
 2.找到WINE_CMD
 修改为：WINE_CMD="LC_ALL=zh_CN.UTF-8 deepin-wine"
