@@ -21,3 +21,6 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
 安装cv2：
 pip install opencv-python
+
+导出环境：
+pip freeze > requirements.txt
