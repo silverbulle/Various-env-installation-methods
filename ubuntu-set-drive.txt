@@ -58,3 +58,22 @@ CUDA 8.0 (8.0.61 GA2)		>= 375.26			>= 376.51
 CUDA 8.0 (8.0.44)			>= 367.48			>= 369.30
 CUDA 7.5 (7.5.16)			>= 352.31			>= 353.66
 CUDA 7.0 (7.0.28)			>= 346.46			>= 347.62
+
+
+nvcc -V 和 nvidia-smi输出的cuda版本不同：
+nvcc其实就是CUDA的编译器,可以从CUDA Toolkit的/bin目录中获取,类似于gcc就是c语言的编译器。由于程序是要经过编译器编程成可执行的二进制文件，而cuda程序有两种代码，一种是运行在cpu上的host代码，一种是运行在gpu上的device代码，所以nvcc编译器要保证两部分代码能够编译成二进制文件在不同的机器上执行。
+CUDA有两个主要的API：runtime(运行时) API和driver API。这两个API都有对应的CUDA版本（如9.2和10.0等）。
+
+1.用于支持driver API的必要文件(如libcuda.so)是由GPU driver installer安装的。nvidia-smi就属于这一类API。
+2.用于支持runtime API的必要文件(如libcudart.so以及nvcc)是由CUDA Toolkit installer安装的。（CUDA Toolkit Installer有时可能会集成了GPU driver Installer）。nvcc是与CUDA Toolkit一起安装的CUDA compiler-driver tool，它只知道它自身构建时的CUDA runtime版本。它不知道安装了什么版本的GPU driver，甚至不知道是否安装了GPU driver。
+
+更新nvcc的cuda版本方法：
+1.从英伟达官方按步骤安装cudatoolkit
+2.在~/.bashrc 中增加如下内容：
+export CUDA_HOME=/usr/local/cuda 
+export PATH=$PATH:$CUDA_HOME/bin 
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+3.保存退出，使其生效
+source ~/.bashrc
+
+！！！切换cuda版本使用命令：sudo ln -s /usr/local/cuda-11.2 /usr/local/cuda
