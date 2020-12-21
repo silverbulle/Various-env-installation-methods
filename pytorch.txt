@@ -13,3 +13,15 @@ pytorch不同版本的包集合：https://download.pytorch.org/whl/torch_stable.
 在使用pytorch跑faster-rcnn时出现“AttributeError: module ‘cupy’ has no attribute 'util”，就找到这个util,把这个util删除，然后就可以运行.api更新了 没有util属性了 直接是cupy.memoize()等方法了
 
 目前了解到3070对应的cuda在11.0以上才可生效（由于sm_86的原因）
+
+
+
+mmdetection的配置（主要是mmcv的安装）：
+
+conda install pytorch==1.5.0 torchvision==0.6.0 cudatoolkit=10.1 -c pytorch
+
+pip install mmcv-full==latest+torch1.5.0+cu101 -f https://download.openmmlab.com/mmcv/dist/index.html
+(安装mmdet需要的依赖)
+pip install -r requirements/build.txt
+pip install -v -e .  # or "python setup.py develop"
+
