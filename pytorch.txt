@@ -17,11 +17,18 @@ pytorch不同版本的包集合：https://download.pytorch.org/whl/torch_stable.
 
 
 mmdetection的配置（主要是mmcv的安装）：
-
+#######################################
 conda install pytorch==1.5.0 torchvision==0.6.0 cudatoolkit=10.1 -c pytorch
 
 pip install mmcv-full==latest+torch1.5.0+cu101 -f https://download.openmmlab.com/mmcv/dist/index.html
 (安装mmdet需要的依赖)
 pip install -r requirements/build.txt
 pip install -v -e .  # or "python setup.py develop"
-
+#######################################
+上述方法在本人3070上并无法生效，会提示检测不到cuda or GPU
+目前以解决的方法为安装1.7.1版本的pytorch（cuda=11.0）
+conda install pytorch torchvision torchaudio cudatoolkit=11.0 -c pytorch
+然后下载已编译的文档（直接使用官方的方法无法生效），使用pip安装
+https://download.openmmlab.com/mmcv/dist/index.html
+然后mmcv-full即安装完成
+ 
