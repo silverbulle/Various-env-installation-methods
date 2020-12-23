@@ -68,7 +68,16 @@ CUDA有两个主要的API：runtime(运行时) API和driver API。这两个API�
 2.用于支持runtime API的必要文件(如libcudart.so以及nvcc)是由CUDA Toolkit installer安装的。（CUDA Toolkit Installer有时可能会集成了GPU driver Installer）。nvcc是与CUDA Toolkit一起安装的CUDA compiler-driver tool，它只知道它自身构建时的CUDA runtime版本。它不知道安装了什么版本的GPU driver，甚至不知道是否安装了GPU driver。
 
 更新nvcc的cuda版本方法：
+首先视需求卸载自动安装的版本
+(1.sudo apt-get autoremove nvidia-cuda-toolkit
+2.查看nvcc -V现在是no such file
+3.查看/usr/local/cuda/bin中是否有可执行文件，如果有，执行下一步；如果没有，则添加软连接：
+sudo ln -s /usr/local/cuda-9.1 /usr/local/cuda
+4.添加环境变量export PATH=$PATH:/usr/local/cuda/bin,查看echo $PATH可以看到添加成功，再执行nvcc -V
+)
+
 1.从英伟达官方按步骤安装cudatoolkit
+https://developer.nvidia.com/cuda-11.0-download-archive?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804&target_type=deblocal
 2.在~/.bashrc 中增加如下内容：
 export CUDA_HOME=/usr/local/cuda 
 export PATH=$PATH:$CUDA_HOME/bin 
