@@ -13,3 +13,11 @@ git push -u xx master
 2.用vim打开，将需要忽视的文件填入
 
 
+github搜索仓库：
+（描述或名称中含有video caption且语言限定为python且在2019.12.12后有更新且收藏数大于20）
+in:name,description video caption language:python pushed:>2019-12-12 stars:>20
+
+(1). 冒号两侧不能有空格；
+(2). 不区分大小写；
+(3). 不能将以下通配符用作搜索查询的一部分，搜索将忽略这些符号：. , : ; / \ ` ' " = * ! ? # $ & + ^ | ~ < > ( ) { } [ ]；
+(4). 搜索默认为master分支。

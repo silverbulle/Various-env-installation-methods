@@ -76,7 +76,7 @@ sudo ln -s /usr/local/cuda-9.1 /usr/local/cuda
 4.添加环境变量export PATH=$PATH:/usr/local/cuda/bin,查看echo $PATH可以看到添加成功，再执行nvcc -V
 )
 
-1.从英伟达官方按步骤安装cudatoolkit
+1.从英伟达官方按步骤安装cudatoolkit(尽量使用run方法安装)
 https://developer.nvidia.com/cuda-11.0-download-archive?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804&target_type=deblocal
 2.在~/.bashrc 中增加如下内容：
 export CUDA_HOME=/usr/local/cuda 
