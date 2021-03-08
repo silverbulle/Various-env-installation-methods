@@ -20,6 +20,7 @@ conda相关操作：
 模糊查找含有<text>字段的包名： conda search <text>
 导出当前环境的包：conda env export > environment.yaml
 使用导出的yaml文件重新创建环境：conda env create -f environment.yaml
+使用conda命令安装requirements.txt中所列的包：conda install --yes --file requirements.txt
 
 
 

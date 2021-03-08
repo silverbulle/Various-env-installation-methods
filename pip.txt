@@ -24,3 +24,6 @@ pip install opencv-python
 
 导出环境：
 pip freeze > requirements.txt
+
+安装requirement.txt文件依赖：
+pip install -r requirements.txt
