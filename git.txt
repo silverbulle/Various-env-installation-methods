@@ -8,6 +8,9 @@ git remote add xx git@github.com:han1202012/TabHost_Test.git
 远程提交：
 git push -u xx master
 
+将git的默认编辑器修改为vim：
+git config --global core.editor vim
+
 添加忽略文件：
 1.touch .gitignore
 2.用vim打开，将需要忽视的文件填入
