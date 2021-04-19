@@ -30,5 +30,26 @@ qing@qingsword.com:~$ sudo update-grub
 software-properties-gtk
 选择附加驱动，等一会你就会发现有自己的驱动选择了含Nvidia那个，选择那个选项并应用
 
+根据PID查找进程位置：
+ps aux | grep 4877
+
+subprocess.py报错：FileNotError: [Errno 2] No such file or directory: 'java': 'java'
+运行coco计算imagecaption得分时，需要调用java进行运算，没有找到java环境包，许愿哦安装Java jdk
+方法：
+1.apt-cache search openjdk 返回结果列表
+2.sudo apt-get install openjdk-8-jdk 找到返回的合适的需要的jdk版本使用安装命令进行安装
+3.java -version 查看安装结果
+（环境变量配置：（似乎不需要）
+1.vim ~/.bashrc
+#JAVA
+export JAVA_HOME=$HOME/Java/jdk1.8.0_161/
+export JRE_HOME=$JAVA_HOME/jre
+export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH
+export CLASSPATH=$JAVA_HOME/lib:$JRE_HOME/lib:.(<--注意这个‘.’很重要，表示当前目录)
+2.退出后：
+source ~/.bashrc）
+
+
+
 
 
