@@ -17,5 +17,6 @@ sudo apt-get install  deepin.com.wechat
 列出所有软件：sudo dpkg --list
 使用命令进行删除：sudo apt-get --purge remove  名称
 
-
+安装rdesktop工具用于在ubuntu下远程连接：
+sudo apt-get install rdesktop
 
