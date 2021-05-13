@@ -19,4 +19,5 @@ sudo apt-get install  deepin.com.wechat
 
 安装rdesktop工具用于在ubuntu下远程连接：
 sudo apt-get install rdesktop
+rdesktop  172.31.8.3 -g 2560x1440 -u xxxx -p 'xxxxxx' -r clipboard:PRIMARYCLIPBOARD
 
