@@ -11,7 +11,7 @@ sudo apt-get install indicator-sysmonitor
 2.启动 indicator-sysmonitor（也可通过应用里的SystemMonitor开启）
 
 
-
+#  每秒刷新一次监控 watch -n 1 -d nvidia-smi  
 # uname -a # 查看内核/操作系统/CPU信息 
 # head -n 1 /etc/issue # 查看操作系统版本 
 # cat /proc/cpuinfo # 查看CPU信息
