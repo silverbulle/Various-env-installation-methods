@@ -14,6 +14,20 @@ git config --global core.editor vim
 添加忽略文件：
 1.touch .gitignore
 2.用vim打开，将需要忽视的文件填入
+(如*.ini为忽略所有后缀为ini的文件，*logs*/为忽略名称中间包含logs的文件夹)
+
+如何撤销已经add和commit的内容：
+1.对于add：
+git reset HEAD xx(撤销xx文件的add，不加则为撤销所有add)
+2.对于commit：
+git reset --soft HEAD^（撤销到上个版本的commit，代码仍然保留，若进行了两次commit，想都撤回，则用HEAD^^或HEAD~2）
+(参数解释：--soft 不删除工作空间改动代码，撤销commit，不撤销add
+          --mixed 不删除工作空间改动代码，撤销commit，并且撤销add
+          --hard 删除工作空间改动代码，撤销commit，撤销add，！注意这样操作后直接回到了上次commit状态)
+
+commit注释写错后需要更改注释:
+git commit --amend
+会进入Vim编辑器，修改注释后保存就可以了。
 
 
 github搜索仓库：
