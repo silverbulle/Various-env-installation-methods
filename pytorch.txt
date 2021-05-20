@@ -14,7 +14,8 @@ pytorch不同版本的包集合：https://download.pytorch.org/whl/torch_stable.
 
 目前了解到3070对应的cuda在11.0以上才可生效（由于sm_86的原因）
 
-
+Pytorch在使用dataloader进行debug时出现变量timing out的解决办法：
+将dataloader的num_work数量设置为0，即不使用多进程，在debug时使用多进程会导致卡死。
 
 mmdetection的配置（主要是mmcv的安装）：
 #######################################
