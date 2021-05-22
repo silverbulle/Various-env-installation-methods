@@ -28,6 +28,9 @@ commit注释写错后需要更改注释:
 git commit --amend
 会进入Vim编辑器，修改注释后保存就可以了。
 
+从远程库中删除文件（并不删除本地文件）：
+git rm --cached *.pyc
+
 比较两个版本间具体代码的更改部分:
 git diff hash1 hash2 --stat(加入stat参数后只显示更改的文件名)
 
