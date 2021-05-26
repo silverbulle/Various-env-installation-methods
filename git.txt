@@ -35,6 +35,29 @@ git rm --cached *.pyc
 git diff hash1 hash2 --stat(加入stat参数后只显示更改的文件名)
 
 
+********5.26实验室ubuntu使用push失效，更换了git push端口：
+error：ssh: connect to host github.com port 22: Connection timed out
+fatal: Could not read from remote repository.
+解决办法：进入~/.ssh目录下，创建一个config文件,不使用22端口即可。
+编辑输入：
+--------------------------------------------------
+Host github.com
+User git
+Hostname ssh.github.com
+PreferredAuthentications publickey
+IdentityFile ~/.ssh/id_rsa
+Port 443
+
+Host gitlab.com
+Hostname altssh.gitlab.com
+User git
+Port 443
+PreferredAuthentications publickey
+Identityfile ~/.ssh/id_rsa
+----------------------------------------------------                              
+ssh -T git@github.com，根据提示确认即可。
+
+
 github搜索仓库：
 （描述或名称中含有video caption且语言限定为python且在2019.12.12后有更新且收藏数大于20）
 in:name,description video caption language:python pushed:>2019-12-12 stars:>20
