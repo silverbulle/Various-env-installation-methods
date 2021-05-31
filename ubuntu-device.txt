@@ -10,6 +10,29 @@ sudo apt-get update
 sudo apt-get install indicator-sysmonitor
 2.启动 indicator-sysmonitor（也可通过应用里的SystemMonitor开启）
 
+Ubuntu下查看DNS配置： cat /etc/resolv.conf
+
+Linux在控制台下提供了不止一个（字符哑）终端，支持多用户同时登录，包括在本机同时登录。控制台“Alt”+“Fx”能够切换到第x个（字符哑）终端。如果需要从X-Window里跳到第（字符哑）终端，需要“Ctrl”+“Alt”+“Fx”。一般情况下如果要从控制台返回Xwindow可用““Alt”+7”来返回到Xwind的图形界面。（Linux发行版提供7个虚拟屏幕，1~6号是控制台终端（（字符哑）终端），第7个上面跑X-Window。）
+注意在Ububtu18.04系统下：
+按下Ctrl + Alt + Fn1进入图形化用户登录界面
+按下Ctrl + Alt + Fn2进入当前图形化界面
+按下Ctrl + Alt + Fn3-Fn6进入命令行虚拟终端
+按下Ctrl + Alt + Fn7-Fn12进入另外的虚拟终端，这些虚拟终端没有任何程序执行，所以只能看到一个闪烁的光标
+当Ubuntu图形界面卡死时：
+1. Ctrl +Alt+F1  转到 tty1
+2. ps -t tty7      查看 tty7 的进程
+3. 找到 tty7 的进程PID号  xxx
+4. kill -9 xxx     或者 sudo pkill Xorg(注销桌面重新登录)
+5. 自动重启图形界面
+Ubuntu下英文代表意思：
+Xorg是ubuntu（电脑操作系统）默认显示服务器的一个软件包。
+其它：（1、Synaptic：代表的是新立得软件包管理器。
+2、Totem：代表的是媒体播放机。
+3、Rhythmbox：代表的是音乐播放器。
+4、GNOME：代表的是桌面环境与附属应用程序。
+5、GIMP：代表的是绘图程序。
+6、Firefox：代表的是网页浏览器（Web Browser）。）
+
 
 #  每秒刷新一次监控 watch -n 1 -d nvidia-smi  
 # uname -a # 查看内核/操作系统/CPU信息 

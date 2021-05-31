@@ -1,0 +1,13 @@
+
+roi pooling的过程可以详解如下：
+第一步：先把roi中的坐标映射到feature map上，映射规则是：把各个坐标除以“输入图片与feature map大小的比值”，就得到feature map上的box坐标。
+第二步：使用pooling得到输出，由于输入图片大小不一，在pooling的过程中需要计算pooling后的结果对应到feature map上所占的范围，然后在那个范围上取max或者取average。
+roi pooling的过程也可以用如下三步来理解：
+第一步：根据输入的image，将roi映射到feature map的对应位置
+第二步：将映射后的区域划分为相同大小的sections（sections的数量与输出维度相同）
+第三步：对每个section进行max pooling操作
+这样就可以从不同大小的方框得到固定大小的相应的feature maps，输出feature map的大小不取决于roi和卷积feature map的大小。
+
+
+
+
