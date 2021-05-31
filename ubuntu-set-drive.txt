@@ -1,5 +1,10 @@
 Ubuntu18.04驱动安装参考网址：https://linuxconfig.org/how-to-install-the-nvidia-drivers-on-ubuntu-18-04-bionic-beaver-linux#h7-automatic-install-using-ppa-repository-to-install-nvidia-beta-drivers
 
+30系显卡可能由于GPU算力太高导致nvcc fatal：Unsupported gpu architecture 'compute_86'
+如果当前CUDA算力高于当前Pytorch版本支持的CUDA算力就会报出这个错误，可以在终端输入
+export TORCH_CUDA_ARCH_LIST="7.5"
+降低这个算力，就不会再报这个错误了。（但后续可能会造成CUDA Error：no kernal image is available for execution on decvice，似乎是编译的算力与显卡算力不匹配）
+
 
 禁用显卡的方法这里在记一下:
 在/etc/modprobe.d/blacklist.conf里添加，如下内容，并执行 sudo update-initramfs -u
@@ -8,6 +13,14 @@ blacklist nouveau
 options nouveau modeset=0
 重启后用lsmod | grep nouveau,如果没有任何输出说明禁用成功。
 
+安装maskrcnn-banchmark时遇到的“AT_CHECK“ is undefined错误：
+解决办法：
+在maskrcnn_benchmark/csrc/cuda/deform_conv_cuda.cu和maskrcnn_benchmark/csrc/cuda/deform_pool_cuda.cu文件的开头加上
+-------------------------------------------
+#ifndef AT_CHECK
+#define AT_CHECK TORCH_CHECK 
+#endif
+-------------------------------------------
 
 安装方法：
 Ⅰ
