@@ -1,0 +1,60 @@
+阿里云轻量应用服务器Ubuntu18.04配置方法：
+
+1.在Linux或Macos中通过ssh连接Linux服务器：
+	（1）通过系统用户及密码远程连接Linux服务器：
+	首先需要为Linux服务器设置好密码登录：在阿里云控制台即可设置。
+	使用ssh root@121.196.xxx.xx
+	首次连接时，系统因无法确认远程服务器的真实性，只能提供服务器的公钥指纹，并向您问询是否继续连接	输入yes，表示您信任该服务器
+	输入Linux服务器的登陆密码，然后回车
+	（2）通过密钥对远程连接Linux服务器：
+	找到本地已保存的私钥文件。
+	本示例以/test/XXX.pem文件为例。
+	运行chmod 400 /test/XXX.pem，修改私钥文件的权限（需要将/test/XXX.pem替换为私钥文件所在的真实路径）
+	运行ssh root@<Linux服务器的公网IP> -i /test/XXX.pem  连接至Linux服务器
+
+
+
+2.配置阿里云-轻量应用服务器-Ubuntu-图形界面-xfce-VNC远程连接
+（1）服务器的配置
+-------------------------------------------------------
+sudo su root
+然后依次输入下面命令，以更新系统。
+apt-get update
+apt-get upgrade
+图像用户界面有很多种，如何选择？    https://www.v2ex.com/t/339475
+这里我选择装xfce
+是在服务器命令行输入，安装xfce
+apt-get install xfce4
+
+服务器VNC的配置
+在服务器命令行输入下面命令，以安装VNC
+apt-get install vnc4server
+然后输入下面命令，以启动VNC,并让它生成一个配置文件
+这里会让你输入一个 连接密码，请记住这个密码
+vncserver :1
+然后输入下面命令，以VNC关闭进程。防止因为文件被占用而修改配置文件时报错。
+vncserver -kill :1
+然后输入下面命令，以打开VNC启动配置文件
+vi ~/.vnc/xstartup
+在 "x-window-manager &" 前面添加一个"#"，以注释不再需要的配置。
+然后在文件最后加入一段配置信息
+--------------------------------------
+sesion-manager & xfdesktop & xfce4-panel &
+xfce4-menu-plugin &
+xfsettingsd &
+xfconfd &
+xfwm4 &
+--------------------------------------
+在阿里云服务器控制台中打开防火墙配置，添加规则，端口为5901
+再次启动vnc
+sudo su root
+vncserver :1
+服务器配置结束
+-----------------------------------------------------------
+(2)个人电脑VNC安装与连接
+VNC官网下载地址:https://www.realvnc.com/en/connect/download/viewer/
+个人为Linux系统情况下下载选择DEB x64
+下载完毕后后使用sudo dpkg -i XX进行安装
+终端使用vncviewer即可打开
+个人为win系统不再赘述
+
