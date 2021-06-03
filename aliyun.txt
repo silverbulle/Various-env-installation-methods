@@ -58,3 +58,115 @@ VNC官网下载地址:https://www.realvnc.com/en/connect/download/viewer/
 终端使用vncviewer即可打开
 个人为win系统不再赘述
 
+………………………………………………………………………………………………………………………………………………………………
+阿里云ubuntu配置wordpress：
+一、安装Apache并更新防火墙
+Apache Web服务器是世界上最流行的Web服务器之一。 它有很好的文档记录，并已广泛用于网络的大部分历史，这使其成为托管网站的绝佳选择。
+使用Ubuntu的包管理器apt安装Apache：
+sudo apt update
+sudo apt install apache2
+调整防火墙以允许Web通信
+确保您的防火墙允许HTTP和HTTPS流量。 您可以检查UFW是否具有Apache的应用程序配置文件
+sudo ufw app list
+应显示：
+----------------------------
+Available applications:
+  Apache
+  Apache Full
+  Apache Secure
+  OpenSSH
+----------------------------
+如果您查看Apache Full配置文件，它应该显示它启用到端口80和443流量
+sudo ufw app info "Apache Full"
+------------------------
+Profile: Apache Full
+Title: Web Server (HTTP,HTTPS)
+Description: Apache v2 is the next generation of the omnipresent Apache web
+server.
+
+Ports:
+  80,443/tcp
+-----------------------
+允许此配置文件的传入HTTP和HTTPS流量：
+sudo ufw allow in "Apache Full"
+将看到默认的Ubuntu 18.04 Apache网页，该网页用于提供信息和测试目的
+若看到该页面，则Web服务器现在可以正确安装并通过防火墙访问
+二、安装Mysql
+sudo apt install mysql-server
+安装完成后，运行一个预先安装了MySQL的简单安全脚本，它将删除一些危险的默认设置并锁定对数据库系统的访问。 运行以下命令启动交互式脚本：
+sudo mysql_secure_installation
+系统会询问您是否要配置VALIDATE PASSWORD PLUGIN（用于指定以后设定的密码等级，如果您输入2作为最强级别，则在尝试设置不包含数字，大小写字母和特殊字符的密码或基于常用字典单词的密码时会报错）
+其余配置均可选“是”
+三、安装PHP
+sudo apt install php libapache2-mod-php php-mysql
+在大多数情况下，您需要修改Apache在请求目录时提供文件的方式。 目前，如果用户从服务器请求目录，Apache将首先查找名为index.html的文件。 我们想告诉网络服务器比其他人更喜欢PHP文件，所以首先让Apache寻找一个index.php文件。
+为此，请输入以下命令以具有root权限的文本编辑器打开dir.conf文件：
+sudo nano /etc/apache2/mods-enabled/dir.conf
+将index.php顺序调整向前即可
+-----------------------------------
+<IfModule mod_dir.c>
+    DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
+</IfModule>
+------------------------------------
+
+重新启动Apache Web服务器以便识别您的更改：
+sudo systemctl restart apache2
+或使用systemctl apache2服务的状态：
+sudo systemctl status apache2
+
+四、安装phpMyadmin
+phpMyadmin是一个基于Web页面管理MySQL的工具，在其上面可以方便的建立、修改、删除数据库。其安装命令如下：
+sudo apt install phpmyadmin php-mbstring php-gettext
+选中apache2，应该按下空格键，apache2前面出现*，再进行确认
+询问是否使用dbconfig-common来设置数据库，这里选择是.
+等待程序安装完成之后，使用下面的命令使能mbstring这个php扩展插件：
+sudo phpenmod mbstring
+然后使用下面的命令重启apache服务：
+sudo systemctl restart apache2
+这时，phpMyAdmin已经成功安装了。在浏览器中输入
+http://your_server_ip/phpmyadmin/   （使用账号：phpmyadmin和刚才输入的密码即可登陆。）
+
+五、Wordpress安装
+ 下载wordpress
+wget https://wordpress.org/latest.tar.gz
+由于在访问网站时，apache默认读取的是/var/www/html下的内容，因此，我们只需要把WordPress里解压出来的内容替换到这个目录下即可。
+sudo rm /var/www/html/index.html
+tar zxvf latest.tar.gz
+sudo cp -rf wordpress/* /var/www/html
+sudo chown -R www-data:www-data /var/www
+完成上述操作后，博客已经部署完成，登录博客http://your_server_ip/
+
+&&&&&&&&
+在设置完phpMyAdmin之后，我们可以使用用户名为phpmyadmin来登录数据库后台，但是这个用户仅具有设置phpmyadmin数据库的相关操作的权限，并非我们创建博客使用的数据库的权限。因此，我们最好是使用root账号或者创建一个新用户来专门管理博客使用的数据库。
+
+在运行高于MySQL 5.7版本以上的Ubuntu系统上，root用户被设置成默认使用auth_socket而不是使用密码登录。这虽然在某些情况下更安全和更实用，但是对于使用外部程序管理数据库（比如phpMyAdmin）的软件来讲，却变得非常复杂。所以，为了能够使用root账号登录MySQL，我们需要把root用户的认证方式从auth_socket切换成mysql_native_password。
+
+查看当前认证方式：
+sudo mysql
+mysql> SELECT user,authentication_string,plugin,host FROM mysql.user;
+使用下面命令修改认证方式，并查看是否修改成功：
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+mysql> FLUSH PRIVILEGES;
+mysql> SELECT user,authentication_string,plugin,host FROM mysql.user;
+此时，我们就可以使用root账户可刚刚设置的密码来登录数据库的后台了。在浏览器中输入http://your_server_ip/phpmyadmin/
+&&&&&&&&&
+为博客创建数据库
+1) 使用root登录phpMyAdmin，点击左上角的新建
+2) 输入数据库的名字（比如wordpress_DB），点击创建
+登录博客http://your_server_ip/，点击现在就开始！
+提到的root，密码为当时设置的密码。后面两项默认即可。点击提交。
+点击现在安装
+博客已经搭建完成！！！！！！！！！！！！！！！！！！！！！！！！！！！
+………………………………………………………………………………………………………………………………………………………………………………………………………………
+
+更新时遇到的问题：更改/var/www/html/wp-config.php的配置进行更新
+遇到问题：
+要执行请求的操作，WordPress 需要访问您的 Web 服务器。请输入您的 FTP 凭据以继续。
+解决：权限问题sudo chown -R www-data:www-data /var/www
+同时在wp-config.php中添加
+----------------------------------
+define( 'FS_METHOD', 'direct' );
+----------------------------------
+
+
+
