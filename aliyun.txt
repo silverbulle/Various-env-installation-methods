@@ -168,5 +168,18 @@ mysql> SELECT user,authentication_string,plugin,host FROM mysql.user;
 define( 'FS_METHOD', 'direct' );
 ----------------------------------
 
+WordPress改变固定链接后点击链接出现“bot found in the server”问题的解决：
+看似是改变固定链接后导致NOT FOUND的情况发生，实际上可能是apache的Mod_rewrite模块未开启或AllowOverride为None（默认为None）
+sudo vim /etc/apache2/apache2.conf(其中不同操作系统配置文件名称不同，此处为ubuntu名称)
+win或centos中应为httped.conf
+-----------------------------------
+<Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+</Directory>
+----------------------（将None修改为All)
+重启apache:systemctl restart apache2
+
 
 
