@@ -21,4 +21,21 @@ sudo apt-get install  deepin.com.wechat
 sudo apt-get install rdesktop
 rdesktop  172.31.8.3 -g 2560x1320 -u xxxx -p 'xxxxxx' -r clipboard:PRIMARYCLIPBOARD\
 
+Ubuntu安装electron-ssr
+客户端下载地址：https://github.com/qingshuisiyuan/electron-ssr-backup/releases/download/v0.2.6/electron-ssr-0.2.6.deb
+
+安装依赖：
+
+sudo apt install libcanberra-gtk-module libcanberra-gtk3-module gconf2 gconf-service libappindicator1
+可选依赖（如果软件报错，请安装可选依赖）
+
+sudo apt-get install libssl-dev 
+sudo apt-get install libsodium-dev
+开始安装
+cd Download
+sudo dpkg -i *.deb
+运行软件
+electron-ssr
+
+
 
