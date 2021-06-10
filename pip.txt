@@ -27,3 +27,15 @@ pip freeze > requirements.txt
 
 安装requirement.txt文件依赖：
 pip install -r requirements.txt
+
+spacy及其对应模型安装：
+spacy的安装直接使用pip install spacy
+但下载对应的模型非常复杂，用官方的命令
+前往模型网址下载https://github.com/explosion/spacy-models
+需要确定模型版本与所安装的spacy版本是否对应，这里我的spacy版本是3.0.6
+处于3.0.0～3.1.0之间，可以安装模型的3.0.0版本
+使用命令直接从github下载安装（此命令从上面的github项目的readme中找到）
+pip install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.0.0/en_core_web_sm-3.0.0.tar.gz
+
+
+

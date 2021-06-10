@@ -34,7 +34,7 @@ software-properties-gtk
 ps aux | grep 4877
 
 subprocess.py报错：FileNotError: [Errno 2] No such file or directory: 'java': 'java'
-运行coco计算imagecaption得分时，需要调用java进行运算，没有找到java环境包，许愿哦安装Java jdk
+运行coco计算imagecaption得分时，需要调用java进行运算，没有找到java环境包，需要安装Java jdk
 方法：
 1.apt-cache search openjdk 返回结果列表
 2.sudo apt-get install openjdk-8-jdk 找到返回的合适的需要的jdk版本使用安装命令进行安装
