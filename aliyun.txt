@@ -58,6 +58,23 @@ VNC官网下载地址:https://www.realvnc.com/en/connect/download/viewer/
 终端使用vncviewer即可打开
 个人为win系统不再赘述
 
+服务器装了虚拟机之后，通过VNC VIEWER远程管理，但连接的时候，经常报错“too many security failures”。
+这是因为VNC的黑名单机制，用来保护你的服务器。如果有人暴力破解，将会触发VNC的黑名单机制。
+因此，有两种方式可以让你重新登录。
+1、杀掉vncserver进程，再重新启动，就可以登录了。
+
+sudo vncserver -kill :1
+sudo vncserver :1
+2、重置黑名单。
+
+vncconfig -display :1 -set BlacklistTimeout=0 -set BlacklistThreshold=1000000
+#重新登录之后恢复黑名单设置：
+vncconfig -display :1 -set BlacklistTimeout=100000000000 -set BlacklistThreshold=10
+#display ：指定桌面号 （一般为1）
+#BlacklistTimeout ： 设置黑名单的过期时间
+#BlacklistThreshold ： 允许的失败次数
+#默认的过期时间是600秒，这里设置的很大，目的是延长黑名单的时间。
+
 ………………………………………………………………………………………………………………………………………………………………
 阿里云ubuntu配置wordpress：
 一、安装Apache并更新防火墙
