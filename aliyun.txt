@@ -181,5 +181,16 @@ win或centos中应为httped.conf
 ----------------------（将None修改为All)
 重启apache:systemctl restart apache2
 
+Apache 服务器通过 .htaccess 文件取消 WordPress 上传附件大小限制
+如果使用的 Web 服务器是 Apache，并且支持 .htaccess 文件，我们可以通过 .htaccess 文件修改上面的设置项来达到同样的目的。把下面设置项加入到网站根目录的 .htaccess 文件中，刷新页面，最大上传文件尺寸同样也会变成 128MB。
+
+.htaccess的地址位于wordpress文件下，例如/var/www/html
+--------------------------------------------------
+php_value upload_max_filesize 128M
+php_value post_max_size 128M
+php_value memory_limit 256M
+php_value max_execution_time 300
+php_value max_input_time 300
+--------------------------------------------------
 
 
