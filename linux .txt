@@ -4,6 +4,7 @@ mkdir dirname    创建文件夹
 
 rm -rf filename
 rm -rf dirname     删除文件或目录
+rm -rf $HOME/.local/share/Trash/files/*  清空回收站文件
 
 创建及删除文件或目录须在sudo权限下
 
