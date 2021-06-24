@@ -210,4 +210,66 @@ php_value max_execution_time 300
 php_value max_input_time 300
 --------------------------------------------------
 
+6.22 *****ubuntu 18.04升级PHP 8.0*************************
+由于wordpress站点一直提示php版本过低会存在安全问题，2021.6.22进行了php的版本升级，记录如下：（查询到的php版本如下，最终决定升级8.0版本）
+
+7.0	2015年12月3日[26]	2018年12月3日	Zend Engine 3 (性能提升[27]并在Windows上支持 64-bit 整数)，统一的变量语法， 基于抽象语法树编译过程。
+7.1	2016年12月1日	2019年12月1日	void返回值类型，类常量可见性修饰符
+7.2	2017年11月30日	2020年11月30日	
+7.3	2018年12月6日	2021年12月6日	
+7.4	2019年11月28日	2022年11月28日	属性添加限定类型、箭头函数、空合并运算符赋值、数组展开操作
+8.0	2020年11月26日	2023年11月26日	JIT即时编译，增加命名参数，注解实现，构造器属性提升，联合类型，Match 表达式，Nullsafe 运算符，字符串与数字的比较更符合逻辑，内部函数类型错误的一致性。
+8.1	2021年11月??日	2024年11月??日
+首先运行如下命令，添加PHP8.0的PPA：
+
+# apt install software-properties-common
+# add-apt-repository ppa:ondrej/php
+# apt update
+然后，运行如下命令，安装PHP 8.0：
+
+# apt install php8.0
+运行完后，看提示，PHP 8.0就安装上了。
+
+接下来，逐个安装PHP 7.4对应的扩展。我的博客是wordpress，对wp应用而言，安装如下扩展：
+
+# apt install php8.0-mysql php8.0-gd php8.0-curl php8.0-dom php8.0-mbstring php8.0-imagick php8.0-zip
+最后一步，禁掉原有的PHP 7.2模块，激活新的PHP 8.0模块，重启Apache这个web服务器，就可以了。
+
+# a2dismod php7.2
+# a2enmod php7.4
+# service apache2 restart
+此处为更新php后续出现的一些问题：
+
+1.vncserver连接灰屏：
+
+通过vncserver -kill ：2（3，4，5）命令杀掉多余的桌面解决
+
+2.vnc桌面进入后无法打开terminal：
+
+使用命令
+
+sudo apt install xfce4-terminal
+然后在桌面右键，按下面的路径，将terminal选择切换为刚安装的xfce4即可解决
+
+Applications -> Settings -> Settings manager -> Prefered Applications -> Utilities
+3.phpmyadmin无法进入：（error：500）
+
+原因应该是php版本与phpmyadmin有一定的对应关系，php版本升级后无法对应导致出错。下面是找到的一些对应版本（目前服务器上的版本为php8.0对应phpmyadmin5.1.1）
+
+phpMyAdmin4.9.0 Current version compatible with PHP 5.5 to 7.3 and MySQL 5.5 and newer.
+phpMyAdmin4.8.0 Older version compatible with PHP 5.5 to 7.2 and MySQL 5.5 and newer. Was supported until June 4, 2019.
+phpMyAdmin4.6.0-4.7.0 Older version compatible with PHP 5.5 to 7.1 and MySQL 5.5 and newer. Was supported until April 1, 2017.
+phpMyAdmin4.5.0 Older version compatible with PHP 5.5 to 7.0 and MySQL 5.5. Was supported until April 1, 2016.
+phpMyAdmin4.4.0 Older version compatible with PHP 5.3.7 to 7.0 and MySQL 5.5. Was supported until October 1, 2016.
+phpMyAdmin4.1.0-4.3.0 Older version compatible with PHP 5.3 and MySQL 5.5. Was supported until October 1, 2015.
+phpMyAdmin4.0.0 Older version compatible with PHP 5.2 and MySQL 5. Does not support PHP 5.5 or newer. Was supported until April 1, 2017.
+直接从网址下载对应版本的phpmyadmin（https://www.phpmyadmin.net/files/）
+
+wget https://files.phpmyadmin.net/phpMyAdmin/5.1.1/phpMyAdmin-5.1.1-all-languages.zip
+使用命令进行解压
+
+sudo apt-get install unzip
+unzip phpMyAdmin-5.1.1-all-languages.zip
+将解压后的文件替换掉/usr/share/下的phpmyadmin文件夹即可。至此更新php版本产生的问题应该已经全部解决。
+
 
