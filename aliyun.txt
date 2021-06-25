@@ -272,4 +272,7 @@ sudo apt-get install unzip
 unzip phpMyAdmin-5.1.1-all-languages.zip
 将解压后的文件替换掉/usr/share/下的phpmyadmin文件夹即可。至此更新php版本产生的问题应该已经全部解决。
 
-
+****************************************************
+wordpress后续更新问题：
+2021.6.25调整文章页使其自动在新标签页打开：
+在主题编辑器中找到header文件，在<head></head>之间加上<base target="_blank">，则所有的链接都会自动在新窗口打开
