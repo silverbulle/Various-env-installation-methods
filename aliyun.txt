@@ -285,3 +285,8 @@ wordpress后续更新问题：
 		__( 'View post' )
 	);
 ------------------------------------------------------------------
+2021.7.6设置wordpress的注册邮箱
+使用WP Mail SMTP by WPForms插件
+
+本次配置为qq邮箱，需开通qq邮箱的SMTP功能及其授权码，在Malier中选择”其它SMTP“，SMTP Host填写为”smtp.qq.com“
+填写参数保存成功后即生效，所有的WOrdPress后台邮件发送就会使用这个配置
