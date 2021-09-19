@@ -293,6 +293,66 @@ wordpress后续更新问题：
 
 --------------------------------------------
 关于配置https：
-由于目前还没有购买域名，无法实际操作。但添加SSL证书存在相关教程
-可参考https://zhuanlan.zhihu.com/p/97527110
-该配置与本服务器完全相同
+首先申请阿里云免费的DV证书并下载
+
+
+服务器检查是否配置openssl
+sudo a2enmod ssl
+如果是
+Considering dependency setenvif for ssl:
+Module setenvif already enabled
+Considering dependency mime for ssl:
+Module mime already enabled
+Considering dependency socache_shmcb for ssl:
+Module socache_shmcb already enabled
+Module ssl already enabled
+
+则无需配置，若不是，则使用
+sudo apt-get install openssl#安装
+sudo a2enmod ssl#开启ssl
+或
+sudo apt-get install python3-certbot-apache
+sudo certbot --apache
+使输出成为上面即可
+
+将下载的ssl证书解压上传至服务器apache目录下（新建cert文件夹）
+
+然后使用
+
+sudo a2enmod ssl 
+sudo service apache2 reload 
+修改/etc/apache2/sites-available/default-ssl.conf
+
+主要确保sslengine为on,以及下面这三项。
+
+ SSLCertificateFile /etc/apache2/cert/6195694_www.silverz.cn_public.crt
+ SSLCertificateKeyFile /etc/apache2/cert/6195694_www.silverz.cn.key
+SSLCertificateChainFile /etc/apache2/cert/6195694_www.silverz.cn_chain.crt
+
+修改/etc/apache2/mods-available/ssl.conf
+修改下面三项
+
+SSLCipherSuite HIGH:!RC4:!MD5:!aNULL:!eNULL:!NULL:!DH:!EDH:!EXP:+MEDIUM
+SSLHonorCipherOrder on
+SSLProtocol all -SSLv2 -SSLv3
+
+启用配置
+sudo a2ensite default-ssl.conf
+sudo service apache2 reload
+这里如果出现错误大多是由于上两步配置错误，检查配置路径是否正确，可以使用
+
+apache2 --help
+查看帮助信息。
+
+把http强制转换成https
+1.启动重定向
+sudo a2enmod rewrite
+2.在/etc/apache2/sites-enabled/000-default.conf文件下写入以下内容（必须写在<VirtualHost *:80></VirtualHost>这个范围里）
+
+RewriteEngine on
+RewriteCond   %{HTTPS} !=on
+RewriteRule   ^(.*)  https://%{SERVER_NAME}$1 [L,R=301]
+
+重启apache2
+sudo systemctl restart apache2
+至此应该全部结束，已经开启了https协议，网站上出现小锁。证书有效期为一年，明年需继续按此流程更换一个新的。
