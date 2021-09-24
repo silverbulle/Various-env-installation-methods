@@ -21,7 +21,9 @@ conda相关操作：
 导出当前环境的包：conda env export > environment.yaml
 使用导出的yaml文件重新创建环境：conda env create -f environment.yaml
 使用conda命令安装requirements.txt中所列的包：conda install --yes --file requirements.txt
-
+清理没用的安装包：conda clean -p 删除没有用的包
+		conda clean -t 删除tar
+		conda clean -y -all 删除所有的安装包及缓存
 
 
 conda在linux下换源：
