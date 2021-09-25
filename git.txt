@@ -3,9 +3,12 @@ rm -rf .git
 
 将新建文件添加到远程仓库：
 git remote add xx git@github.com:han1202012/TabHost_Test.git
+查看推送设置：
+git remote -v
 
 远程提交：
 git push -u xx master
+
 
 将git的默认编辑器修改为vim：
 git config --global core.editor vim
