@@ -356,3 +356,14 @@ RewriteRule   ^(.*)  https://%{SERVER_NAME}$1 [L,R=301]
 重启apache2
 sudo systemctl restart apache2
 至此应该全部结束，已经开启了https协议，网站上出现小锁。证书有效期为一年，明年需继续按此流程更换一个新的。
+------------------------------------------------------------------------
+添加雪花特效，所需文件的链接https://github.com/kujian/xmas-snow
+
+服务器的根目录指：wordpress的目录，即/var/www/html/下
+
+将文件中的snow.js文件上传到服务器根目录，并进行调用即可，在主题的footer.php文件中添加（最后的body之前）
+
+<script type="text/javascript" src="snow.js"></script>
+<script type="text/javascript">
+var snow = new Snow();
+</script>
