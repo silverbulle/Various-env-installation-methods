@@ -513,3 +513,116 @@ transform: translate(0, 0)
 }
 }
 -------------------------------------------------------------------------------------------------
+
+部署 Frp 服务端到云服务器
+根据系统平台，从链接下载 Frp 源码上传到云服务器
+
+当然，也可以通过 wget 命令直接下载：
+
+# 使用wget命令下载0.37.1版本
+wget https://github.com/fatedier/frp/releases/download/v0.37.1/frp_0.37.1_linux_amd64.tar.gz
+接着，解压文件压缩包
+
+# 解压文件
+tar -zxvf frp_0.37.1_linux_amd64.tar.gz
+然后，使用 vi/vim 编辑 Frp 服务端配置文件「 frps.ini 」
+
+其中
+
+bind_port 用于指定 Frp 服务端的端口号
+dashboard_user、dashboard_pwd、dashboard_port 分别用于配置 Frp 后台管理的账号信息及访问端口号
+# frps.ini
+
+[common]
+bind_addr = 0.0.0.0
+bind_port = 7777
+token = 12345678    # 授权码
+
+# 配置frp后台管理账号
+dashboard_user = admin
+dashboard_pwd = admin
+dashboard_port = 8888 
+enable_prometheus = true
+
+# 配置日志配置文件夹
+log_file = /var/log/frps.log
+log_level = info
+log_max_days = 3
+最后，开放云服务器防火墙端口、配置安全组规则，运行 Frp 服务
+
+# 开放防火墙端口号、配置安全组规则
+# 这里配置7777、8888端口号
+
+# 配置服务
+mkdir -p /etc/frp
+cp frps.ini /etc/frp
+cp frps /usr/bin
+#cp systemd/frps.service /usr/lib/a
+​cp systemd/frps.service /etc/systemd/system/
+
+# 启动frps服务
+systemctl enable frps
+systemctl start frps
+访问 Frp 后台管理
+打开浏览器，访问云服务器的 ip 地址 + 上面指定的端口号「 8888 」，输入上面的用户名和密码，即可以进入到 Frp 后台管理界面，实时查看 Frp 的运行状态及代理统计信息展示
+
+
+部署 Frp 客户端到目标计算机
+由于目标计算机是 Windows，所有需要先下载 Windows 版本的 Frp 源码
+
+首先，修改客户端配置文件「 frpc.ini 」
+
+# 配置Frp客户端信息
+# frpc.ini
+
+[common]
+server_addr = frp公网ip地址   #frp服务公网ip地址
+server_port = 7777  # frps.ini中指定的端口号
+token = 12345678   # 和frps.ini中的token保持一致
+
+[ssh]
+type = tcp   # 通信方式
+local_ip = 127.0.0.1
+local_port = 3389   # 远程访问服务默认端口是3389
+remote_port = 6000  # 定义远程端口通过6000指向本地3389端口
+
+然后，使用 CMD 中使用下面命令运行 Frp 客户端
+
+# 运行frp客户端
+frpc -c frpc.ini
+最后，刷新 Frp Dashboard 管理页面，可以观察到 Frp 客户端的连接信息
+
+目标计算机开机自启 – winsw
+为了保证目标计算机永久在线，可以利用「 winsw 」将客户端连接配置做成一个服务，并配置为开机自启
+
+项目下载地址：https://github.com/winsw/wins…
+
+配置步骤如下：
+
+根据系统版本下载对应源码，解压后放置到 Frp 同一级目录下
+修改可执行文件名称为 winsw.exe
+新建一个配置文件 winsw.xml，添加运行 Frp 客户端的命令
+配置信息如下：
+
+# winsw.xml
+<service>
+    <id>frp</id>
+    <name>frp</name>
+    <description>frp远程控制客户端服务</description>
+    <executable>frpc</executable>
+    <arguments>-c frpc.ini</arguments>
+    <logmode>reset</logmode>
+</service>
+最后，使用管理员身份打开 CMD 终端，运行下面命令，使得 Frp 客户端能变成系统服务在后台运行了
+
+# 管理员身份运行
+winsw install
+winsw start
+  远程桌面访问
+通过云服务器 ip + 客户端指定的远程访问端口号，就可以对目标计算机进行远程桌面控制了
+
+假设云服务器 ip 为「 *.*.*.* 」，Frp 客户端配置文件中指定的远程端口号为 6000
+
+只需要使用命令「 mstsc 」进入到远程桌面窗口，计算机输入「 *.*.*.*:6000 」,输入目标计算机的用户名、密码即可以远程控制目标计算机了
+
+当然，也可以通过手机 App，比如「 RD Client 」来控制远程桌面
